@@ -10,7 +10,7 @@
     function ProfileController($scope, UserService, $location){
         $scope.error = null;
         $scope.message = null;
-        $scope.updateUser = updateUser;
+        $scope.update = updateUser;
 
         $scope.currentUser = UserService.getCurrentUser();
         if (!$scope.currentUser) {
@@ -24,11 +24,11 @@
             $scope.error = null;
             $scope.message = null;
 
-            $scope.currentUser = UserService.updateUser(user);
+            var newUser = UserService.updateUser(user._id, $scope.currentUser);
 
-            if (user) {
+            if (newUser) {
                 $scope.message = "User updated successfully";
-                UserService.setCurrentUser($scope.currentUser);
+                UserService.setCurrentUser(newUser);
             } else {
                 $scope.message = "Unable to update the user";
             }

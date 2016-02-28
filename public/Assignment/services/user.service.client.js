@@ -22,6 +22,7 @@
         ];
         var services = {
             findUserByCredentials: findUserByCredentials,
+            findUserByUsername:findUserByUsername,
             findAllUsers: findAllUsers,
             createUser: createUser,
             deleteUserById: deleteUserById,
@@ -33,20 +34,33 @@
 
 
         function findUserByCredentials(username, password){
-
+            for (var u in users){
+                if (users[u].username == username && users[u].password == password){
+                    return users[u];
+                }
+            }
+            return null;
+        }
+        function findUserByUsername(username){
+            for (var u in users){
+                if (users[u].username == username){
+                    return users[u];
+                }
+            }
+            return null;
         }
 
         function findAllUsers() {
-
+            return users;
         }
 
         function createUser(user){
             var user = {
+                _id:(new Date).getTime(),
                 username:user.username,
-                password:user.password,
-                email: user.email
+                password:user.password
             }
-            model.push(user);
+            users.push(user);
             return user;
 
         }
@@ -55,8 +69,23 @@
 
         }
         function updateUser(userId, user){
+            var target = null;
+            for (var u in users) {
+                if (users[u]._id == userId) {
+                    target = users[u];
+                    break;
+                }
+            }
+            if (target != null){
+                target.firstName = user.firstName;
+                target.lastName = user.lastName;
+                target.username = user.username;
+                target.password = user.password;
+            }
 
+            return target;
         }
+
         function setCurrentUser(user){
             $rootScope.currentUser = user;
         }

@@ -31,12 +31,12 @@
                 return;
             }
 
-            var username = UserService.findUserByUsername(user.username);
-            if (username != null) {
+            var foundUser = UserService.findUserByUsername(user.username);
+            if (foundUser != null) {
                 $scope.message = "User already exists";
                 return;
             }
-            var newUser = UserService.createUser($scope.user);
+            var newUser = UserService.createUser(user);
             UserService.setCurrentUser(newUser);
             $location.url("/profile");
         }

@@ -7,7 +7,7 @@
         .module("FormBuilderApp")
         .factory("FormService", FormService);
 
-    function FormService($scope, $location, $rootscope){
+    function FormService($rootScope){
         var forms = [
             {"_id": "000", "title": "Contacts", "userId": 123},
             {"_id": "010", "title": "ToDo",     "userId": 123},
@@ -20,28 +20,44 @@
             findAllFormsForUser: findAllFormsForUser,
             deleteFormById: deleteFormById,
             updateFormById: updateFormById,
-            setSelectedFormIndex: setSelectedFormIndex
         }
         return services;
 
-        function  createFormForUser(userId, form){
+        function createFormForUser(userId, form){
+            var createForm = {
+                _id:form._id,
+                title:form.title,
+                userId:userId
+            }
+            forms.push(createForm);
+            return createForm;
 
         }
 
         function findAllFormsForUser(userId){
+            var userForms = []
+            for (var f in forms){
+                if (forms[f].userId == userId){
+                    userForms.push(forms[f]);
+                }
+            }
+            return userForms;
 
         }
 
         function deleteFormById(formId){
-
+            forms.splice(formId,1);
         }
 
         function updateFormById(formId, newForm){
-
-        }
-
-        function setSelectedFormIndex(index){
-
+            if (formId == null){
+                return null
+            }
+            for (var f in forms){
+                if (forms[f]._id == formId){
+                    forms[f].title= newForm.title;
+                }
+            }
         }
 
     }

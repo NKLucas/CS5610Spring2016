@@ -39,8 +39,8 @@
                     controller: "FormController"
                 })
             .otherwise({
-                redirectTo:"views/home/home.view.html"
+                redirectTo:"/home"
             });
 
     }
-})()
+})();

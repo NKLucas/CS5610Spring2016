@@ -18,13 +18,13 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td><input ng-model = "currentForm.id" class="form-control" type="text" placeholder="Id"></td>
-                        <td><input ng-model = "currentForm.name" class="form-control" type="text" placeholder="name"></td>
+                        <td><input ng-model = "currentForm._id" class="form-control" type="text" placeholder="Id"></td>
+                        <td><input ng-model = "currentForm.title" class="form-control" type="text" placeholder="name"></td>
                         <td>
                             <a class="add" ng-click = "addForm(currentForm)" title="add">
                                 <i class="glyphicon glyphicon-plus"></i>
                             </a>
-                            <a class="update" ng-click = "updateForm($index)" title="update">
+                            <a class="update" ng-click = "updateForm(currentForm)" title="update">
                                 <i class="glyphicon glyphicon-ok"></i>
                             </a>
                         </td>
@@ -36,7 +36,7 @@
                             <a class="remove" ng-click = "deleteForm($index)" title="remove">
                                 <i class="glyphicon glyphicon-remove"></i>
                             </a>
-                            <a class="edit" ng-click = "selectForm($index)" title="edit">
+                            <a class="edit" ng-click = "selectForm($index, form)" title="edit">
                                 <i class="glyphicon glyphicon-pencil"></i>
                             </a>
                         </td>
