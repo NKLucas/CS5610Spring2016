@@ -1,70 +1,46 @@
-
-<body>
-
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">Forms!</h1>
 
             <ul class="nav nav-tabs">
-                <li role="presentation" class="active"><a href="#">Forms</a></li>
-                <li role="presentation"><a href="form-fields.view.html">Fields</a></li>
+                <li role="presentation" class="active"><a href="#/forms">Forms</a></li>
+                <li role="presentation"><a href="#/forms">Fields</a></li>
             </ul>
             <div class="table-responsive ">
                 <table class="table table-striped table-bordered">
                     <thead>
                     <tr>
+                        <th><i class="glyphicon glyphicon-sort"></i>  Form ID</th>
                         <th><i class="glyphicon glyphicon-sort"></i>  Form Name</th>
                         <th><i class="glyphicon glyphicon-sort"></i>  Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td><input class="form-control" type="text" placeholder="name"></td>
+                        <td><input ng-model = "currentForm.id" class="form-control" type="text" placeholder="Id"></td>
+                        <td><input ng-model = "currentForm.name" class="form-control" type="text" placeholder="name"></td>
                         <td>
-                            <a class="add" href="javascript:void(0)" title="add">
+                            <a class="add" ng-click = "addForm(currentForm)" title="add">
                                 <i class="glyphicon glyphicon-plus"></i>
                             </a>
-                            <a class="update" href="javascript:void(0)" title="update">
+                            <a class="update" ng-click = "updateForm($index)" title="update">
                                 <i class="glyphicon glyphicon-ok"></i>
                             </a>
                         </td>
                     </tr>
-                    <tr>
-                        <td><a href="form-fields.view.html">Registration Form</a></td>
+                    <tr ng-repeat = "form in forms">
+                        <td>{{form._id}}</td>
+                        <td>{{form.title}}</td>
                         <td>
-                            <a class="remove" href="javascript:void(0)" title="remove">
+                            <a class="remove" ng-click = "deleteForm($index)" title="remove">
                                 <i class="glyphicon glyphicon-remove"></i>
                             </a>
-                            <a class="edit" href="javascript:void(0)" title="edit">
+                            <a class="edit" ng-click = "selectForm($index)" title="edit">
                                 <i class="glyphicon glyphicon-pencil"></i>
                             </a>
                         </td>
                     </tr>
-                    <tr>
-                        <td><a href="form-fields.view.html">Contact List</a></td>
-                        <td>
-                            <a class="remove" href="javascript:void(0)" title="remove">
-                                <i class="glyphicon glyphicon-remove"></i>
-                            </a>
-                            <a class="edit" href="javascript:void(0)" title="edit">
-                                <i class="glyphicon glyphicon-pencil"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><a href="form-fields.view.html">To Do List</a></td>
-                        <td>
-                            <a class="remove" href="javascript:void(0)" title="remove">
-                                <i class="glyphicon glyphicon-remove"></i>
-                            </a>
-                            <a class="edit" href="javascript:void(0)" title="edit">
-                                <i class="glyphicon glyphicon-pencil"></i>
-                            </a>
-                        </td>
-                    </tr>
-
                     </tbody>
                 </table>
             </div>
@@ -73,11 +49,3 @@
 </div>
 
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-</body>
-</html>

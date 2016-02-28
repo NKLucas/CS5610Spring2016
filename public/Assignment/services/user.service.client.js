@@ -24,28 +24,45 @@
             findAllUsers: findAllUsers,
             createUser: createUser,
             deleteUserById: deleteUserById,
-            updateUser: updateUser
+            updateUser: updateUser,
+            setCurrentUser: setCurrentUser,
+            getCurrentUser: getCurrentUser
         };
         return services;
 
-        function findUserByCredentials(username, password, callback){
+
+        function findUserByCredentials(username, password){
 
         }
 
-        function findAllUsers(callback) {
+        function findAllUsers() {
 
         }
 
-        function createUser(user, callback){
+        function createUser(user){
+            var user = {
+                username:user.username,
+                password:user.password,
+                email: user.email
+            }
+            model.push(user);
+            return user;
 
         }
 
-        function deleteUserById(userId, callback){
+        function deleteUserById(userId){
 
         }
-        function updateUser(userId, user, callback){
+        function updateUser(userId, user){
 
         }
+        function setCurrentUser(user){
+            $rootScope.currentUser = user;
+        }
+        function  getCurrentUser(){
+            return $rootScope.currentUser;
+        }
+
 
 
     }
