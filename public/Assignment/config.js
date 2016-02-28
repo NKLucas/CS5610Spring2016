@@ -2,6 +2,7 @@
  * Created by Zhiyu on 2/27/16.
  */
 (function () {
+    "use strict";
     angular
         .module("FormBuilderApp")
         .config(config)
@@ -25,24 +26,21 @@
                 })
             .when("/admin",
                 {
-                    templateUrl: "views/admin/admin.view.html",
-                    controller: "AdminController"
+                    templateUrl: "views/admin/admin.view.html"
                 })
             .when("/home",
                 {
-                    templateUrl: "views/home/home.view.html",
-                    controller: "HomeController"
+                    templateUrl: "views/home/home.view.html"
+
                 })
             .when("/forms",
                 {
                     templateUrl: "views/forms/forms.view.html",
                     controller: "FormController"
                 })
-            .when("/profile",
-                {
-                    templateUrl: "views/users/profile.view.html",
-                    controller: "ProfileController"
-                });
+            .otherwise({
+                redirectTo:"views/home/home.view.html"
+            });
 
     }
 })()
