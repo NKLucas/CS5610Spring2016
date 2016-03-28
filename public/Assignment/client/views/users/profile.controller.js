@@ -23,16 +23,17 @@
 
             $scope.error = null;
             $scope.message = null;
-
-            var newUser = UserService.updateUser(user._id, $scope.currentUser);
-
-            if (newUser) {
-                $scope.message = "User updated successfully";
-                UserService.setCurrentUser(newUser);
-            } else {
-                $scope.message = "Unable to update the user";
-            }
+            console.log(user._id, $scope.currentUser);
+            UserService
+                .updateUser(user._id, $scope.currentUser)
+                .then(function(newUser){
+                    if (newUser) {
+                        $scope.message = "User updated successfully";
+                        UserService.setCurrentUser(newUser);
+                    } else {
+                        $scope.error = "Unable to update the user";
+                    }
+                })
         }
-
     }
 })();
