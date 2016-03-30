@@ -133,7 +133,11 @@ module.exports = function(app){
 
     function updateField(formId, fieldId, newField) {
         var field = findField(formId, fieldId);
-        field = newField;
+        field._id = newField._id;
+        field.label = newField.label;
+        field.type = newField.type;
+        field.placeholder = newField.placeholder;
+        field.options = newField.options;
         return field;
     }
 

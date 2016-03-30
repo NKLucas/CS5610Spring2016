@@ -12,13 +12,13 @@
         var formId = $routeParams.formId;
         var title = $routeParams.title;
 
+
         model.addField = addField;
         model.deleteField = deleteField;
         model.editField = editField;
         model.title = title;
-
-
-
+        model.confirmEdit = confirmEdit;
+        //model.edittingField = edittingField;
 
         FieldService
             .getFieldsForForm(formId)
@@ -26,8 +26,35 @@
                 model.fields = fields;
             });
 
-        function editField(){
+        function confirmEdit(selectedField){
+            console.log("ConfirmEdit is called from controller.");
+            FieldService
+                .updateField(formId, selectedField._id, selectedField)
+                .then(function(updated){
+                    model.fields[$scope.selectedFieldIndex].label = updated.label;
+                    model.fields[$scope.selectedFieldIndex].placeholder = updated.placeholder;
+                    model.fields[$scope.selectedFieldIndex].options = updated.options;
+                })
+        }
 
+
+        function editField(index, field){
+            $scope.selectedFieldIndex = index;
+            model.selectedField = {
+                _id : field._id,
+                label: field.label,
+                type : field.type,
+                placeholder: field.placeholder,
+                options : field.options
+
+            };
+            //console.log(formId, fieldId, "FROM Field Controller EditField");
+            //FieldService
+            //    .getFieldForForm(formId, fieldId)
+            //    .then(function(field){
+            //        console.log(field);
+            //
+            //    });
         }
 
         function addField(fieldType){
@@ -68,7 +95,7 @@
             FieldService
                 .createFieldForForm(formId, field)
                 .then(function(fields){
-                    $scope.model.fields = fields;
+                    model.fields = fields;
                 });
         }
 

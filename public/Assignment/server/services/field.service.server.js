@@ -5,7 +5,7 @@ module.exports = function(app, formModel){
     app.get("/api/assignment/form/:formId/field", getFormFields);
     app.get("/api/assignment/form/:formId/field/:fieldId", getField);
     app.post("/api/assignment/form/:formId/field", createField);
-    app.put(" /api/assignment/form/:formId/field/:fieldId", updateField);
+    app.put("/api/assignment/form/:formId/field/:fieldId", updateField);
     app.delete("/api/assignment/form/:formId/field/:fieldId", deleteField);
 
 
@@ -42,11 +42,15 @@ module.exports = function(app, formModel){
     function updateField(req, res){
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        formModel
-            .updateField(formId, fieldId)
-            .then(function(new_filed){
-                res.json(new_filed);
-            });
+        var field = req.body;
+        console.log("update server side is called");
+        var new_field = formModel.updateField(formId, fieldId, field);
+        res.json(new_field);
+        //formModel
+        //    .updateField(formId, fieldId, field)
+        //    .then(function(new_filed){
+        //        res.json(new_filed);
+        //    });
     }
 
     function deleteField(req, res){
