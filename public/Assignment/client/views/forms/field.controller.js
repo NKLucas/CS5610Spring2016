@@ -27,7 +27,16 @@
             });
 
         function confirmEdit(selectedField){
-            console.log("ConfirmEdit is called from controller.");
+            var textArray = model.optionText.split("\n");
+            var options = [];
+            for (var i in textArray){
+                var temp = textArray[i].split(":");
+                options.push({
+                    label: temp[0],
+                    value: temp[1]
+                })
+            }
+            selectedField.options = options;
             FieldService
                 .updateField(formId, selectedField._id, selectedField)
                 .then(function(updated){
@@ -46,15 +55,14 @@
                 type : field.type,
                 placeholder: field.placeholder,
                 options : field.options
-
             };
-            //console.log(formId, fieldId, "FROM Field Controller EditField");
-            //FieldService
-            //    .getFieldForForm(formId, fieldId)
-            //    .then(function(field){
-            //        console.log(field);
-            //
-            //    });
+
+            var optionText = [];
+            for (var i in model.selectedField.options){
+                var string = model.selectedField.options[i].label + ":" + model.selectedField.options[i].value;
+                optionText.push(string);
+            }
+            model.optionText = optionText.join("\n");
         }
 
         function addField(fieldType){

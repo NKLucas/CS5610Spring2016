@@ -73,13 +73,15 @@
                         </div>
 
                         <div class="col-sm-4 container-fluid pull-right buttons-bottom">
-                            <a ng-click="model.editField($index, field)" class="btn btn-success btn-sm "
+                            <a ng-click="model.editField($index, field)" class="btn btn-warning btn-sm "
                                data-toggle="modal" data-target="#myModal">
                                 <scan class="glyphicon glyphicon-pencil"></scan>
                             </a>
+                            <a class="btn btn-success btn-sm"><scan class="glyphicon glyphicon-plus"></scan></a>
                             <a ng-click="model.deleteField(field._id)" class="btn btn-danger btn-sm">
                                 <scan class="glyphicon glyphicon-remove"></scan>
                             </a>
+                            <a class="btn btn-primary btn-sm"><scan class="glyphicon glyphicon-align-justify"></scan></a>
                         </div>
                     </div>
                 </div>
@@ -131,7 +133,7 @@
                         <div ng-show = "model.selectedField.options">
                             <br>
                             <label > Options </label>
-                            <textarea ng-model = "model.selectedField.options" cols="50" rows="5" class="form-control" id="options"></textarea>
+                            <textarea ng-model="model.optionText" cols="50" rows="5" class="form-control" id="options" placeholder="{{model.optionText}}"></textarea>
                             <br>
                         </div>
                     </div>
@@ -141,10 +143,7 @@
                         <button class="btn btn-warning" type="button" data-dismiss="modal">Cancel</button>
                     </div>
                 </div>
-
             </div>
         </div>
-
-
     </div>
 </div>
