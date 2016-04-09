@@ -1,10 +1,9 @@
 /**
  * Created by Zhiyu on 3/26/16.
  */
-module.exports = function(app) {
-    "use strict";
-    var userModel = require("./models/user.model.js")(app);
-    var formModel = require("./models/form.model.js")(app);
+module.exports = function(app, mongoose, db) {
+    var userModel = require("./models/user.model.server.js")(mongoose, db);
+    var formModel = require("./models/form.model.server.js")(mongoose, db);
 
     var userService = require("./services/user.service.server.js")(app, userModel);
     var formService = require("./services/form.service.server.js")(app, formModel);
