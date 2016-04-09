@@ -79,8 +79,8 @@ module.exports = function(mongoose, db){
             function(err, info) {
                 userModel.findOne({
                     _id : id
-                },function(err, user) {
-                    deferred.resolve(user);
+                },function(err, new_user) {
+                    deferred.resolve(new_user);
                 });
             }
         );
