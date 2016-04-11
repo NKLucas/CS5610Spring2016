@@ -37,6 +37,7 @@ module.exports = function(app, userModel){
     }
 
     function findUserFromUsername(req, res){
+        var username = req.query.username;
         userModel
             .findUserByUsername(username)
             .then(function(user){
