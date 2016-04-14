@@ -6,7 +6,7 @@ var q = require('q');
 module.exports = function(app, mongoose, db){
 
     var formSchema = require('./form.schema.server.js')(mongoose);
-    var formModel = mongoose.model("formModel2", formSchema);
+    var formModel2 = mongoose.model("formModel2", formSchema);
 
 
     var api = {
@@ -21,11 +21,9 @@ module.exports = function(app, mongoose, db){
     // FIELDS APIS
 
     function createField(formId, field) {
-        var form = findById(formId);
-
         var deferred = q.defer();
-        formModel.update({_id : formId}, {$push:{fields:field}}, function(err, status){
-            formModel.findById(formId, function(err, form){
+        formModel2.update({_id : formId}, {$push:{fields:field}}, function(err, status){
+            formModel2.findById(formId, function(err, form){
                 if (err){
                     deferred.reject(err);
                 } else {
@@ -38,7 +36,7 @@ module.exports = function(app, mongoose, db){
 
     function findAllFields(formId) {
         var deferred = q.defer();
-        formModel.findById(formId, function(err, form){
+        formModel2.findById(formId, function(err, form){
             if (err){
                 deferred.reject(err);
             } else {
@@ -50,7 +48,7 @@ module.exports = function(app, mongoose, db){
 
     function findField(formId, fieldId) {
         var deferred = q.defer();
-        formModel.findById(formId, function(err, form){
+        formModel2.findById(formId, function(err, form){
             form.fields.findById(fieldId, function(err, field){
                 if (err){
                     deferred.reject(err);
@@ -66,7 +64,7 @@ module.exports = function(app, mongoose, db){
 
     function updateField(formId, fieldId, newField) {
         var deferred = q.defer();
-        formModel.findById(formId, function (err, form) {
+        formModel2.findById(formId, function (err, form) {
             if (err){
                 deferred.reject(err);
             }else {
@@ -91,7 +89,7 @@ module.exports = function(app, mongoose, db){
 
     function removeField(formId, fieldId) {
         var deferred = q.defer();
-        formModel.findById(formId, function(err, form){
+        formModel2.findById(formId, function(err, form){
             if (err){
                 deferred.reject(err);
             } else {
