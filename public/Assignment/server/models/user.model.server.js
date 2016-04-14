@@ -75,6 +75,8 @@ module.exports = function(mongoose, db){
 
     function update(id, user){
         var deferred = q.defer();
+
+        delete user._id;
         userModel.update({_id : id}, user,
             function(err, info) {
                 userModel.findOne({
