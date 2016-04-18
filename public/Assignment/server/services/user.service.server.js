@@ -5,6 +5,7 @@
 
 var passport         = require('passport');
 var LocalStrategy    = require('passport-local').Strategy;
+var bcrypt           = require("bcrypt-nodejs");
 
 module.exports = function(app, userModel){
 
@@ -30,7 +31,6 @@ module.exports = function(app, userModel){
     function register(req, res) {
         var newUser = req.body;
         newUser.roles = ['student'];
-
         userModel
             .findUserByUsername(newUser.username)
             .then(
@@ -127,16 +127,6 @@ module.exports = function(app, userModel){
     }
 
 
-    //function updateById(req, res){
-    //    var id = req.params.id;
-    //    var user = req.body;
-    //    userModel
-    //        .updateUser(id, user)
-    //        .then(function(updatedUser){
-    //            res.json(updatedUser);
-    //        });
-    //}
-
     function updateUser(req, res) {
         var newUser = req.body;
         if(!isAdmin(req.user)) {
@@ -191,15 +181,6 @@ module.exports = function(app, userModel){
             res.status(403).send("NOT ADMIN");
         }
     }
-    //function deleteById(req, res){
-    //    var id = req.params.id;
-    //    userModel
-    //        .remove(id)
-    //        .then(function(users){
-    //            res.json(users);
-    //        });
-    //}
-
 
     function login(req, res) {
         var user = req.user;
@@ -237,6 +218,22 @@ module.exports = function(app, userModel){
                 }
             );
     }
+    //function localStrategy(username, password, done) {
+    //    userModel
+    //        .findUserByUsername(username)
+    //        .then(
+    //            function(user) {
+    //                if(user && bcrypt.compareSync(password, user.password)) {
+    //                    return done(null, user);
+    //                } else {
+    //                    return done(null, false);
+    //                }
+    //            },
+    //            function(err) {
+    //                if (err) { return done(err); }
+    //            }
+    //        );
+    //}
 
     function serializeUser(user, done) {
         done(null, user);

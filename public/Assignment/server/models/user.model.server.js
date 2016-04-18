@@ -4,6 +4,7 @@
 
 var guid = require('guid');
 var q = require("q");
+var bcrypt = require("bcrypt-nodejs");
 
 // define apis that the model provide and export them.
 module.exports = function(mongoose, db){
@@ -26,6 +27,12 @@ module.exports = function(mongoose, db){
     // define concrete functions.
     function create(user){
         var deferred = q.defer();
+
+        //var password = user.password;
+        //password = bcrypt.hashSync(password);
+        //delete user.password;
+        //user.password = password;
+
         userModel
             .create(user, function(err, new_user){
                 if (err) {
@@ -55,7 +62,6 @@ module.exports = function(mongoose, db){
             if(err){
                 deferred.reject(err);
             } else {
-                //console.log("findBYIDUSER", id, user);
                 deferred.resolve(user);
             }
         });
@@ -66,6 +72,12 @@ module.exports = function(mongoose, db){
         var deferred = q.defer();
 
         delete user._id;
+
+        //var password = user.password;
+        //password = bcrypt.hashSync(password);
+        //delete user.password;
+        //user.password = password;
+
         userModel.update({_id : id}, user,
             function(err, info) {
                 userModel.findOne({
