@@ -12,28 +12,16 @@ module.exports = function(mongoose, db){
     var userModel = mongoose.model("userModel", userSchema);
 
     var api = {
-        create: create,
-        findAll: findAll,
-        findById: findById,
-        update: update,
-        remove: remove,
+        createUser: create,
+        findAllUsers: findAllUsers,
+        findUserById: findById,
+        updateUser: update,
+        removeUser: remove,
         findUserByUsername: findUserByUsername,
         findUserByCredentials: findUserByCredentials
-        //createAllUser: createAllUser
     }
     return api;
 
-
-    //function createAllUser(){
-    //    userModel.create(users, function(err, users){
-    //        if(err){
-    //            console.log("Create all users error:", err);
-    //        } else {
-    //            console.log("All users created successfully!");
-    //        }
-    //
-    //    });
-    //}
 
     // define concrete functions.
     function create(user){
@@ -49,9 +37,9 @@ module.exports = function(mongoose, db){
         return deferred.promise;
     }
 
-    function findAll(){
+    function findAllUsers(){
         var deferred = q.defer();
-        userModel.findAll(function(err, users){
+        userModel.find(function(err, users){
             if(err){
                 deferred.reject(err);
             } else {
@@ -67,6 +55,7 @@ module.exports = function(mongoose, db){
             if(err){
                 deferred.reject(err);
             } else {
+                //console.log("findBYIDUSER", id, user);
                 deferred.resolve(user);
             }
         });

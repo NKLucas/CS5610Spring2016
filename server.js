@@ -3,10 +3,25 @@ var bodyParser = require('body-parser');
 var multer = require('multer'); // v1.0.5
 var mongoose = require('mongoose');
 
+var passport      = require('passport');
+var cookieParser  = require('cookie-parser');
+var session       = require('express-session');
+
 var upload = multer(); // for parsing multipart/form-data
 
 
 var app = express();
+
+app.use(session({
+    secret: 'this is the secret',
+    resave: true,
+    saveUninitialized: true
+}));
+
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 
 app.use(bodyParser.json()); // for parsing application/json

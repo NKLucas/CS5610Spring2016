@@ -26,10 +26,16 @@
             console.log(user._id, $scope.currentUser);
             UserService
                 .updateUser(user._id, $scope.currentUser)
-                .then(function(newUser){
-                    if (newUser) {
+                .then(function(newUsers){
+                    if (newUsers) {
                         $scope.message = "User updated successfully";
-                        UserService.setCurrentUser(newUser);
+                        for (var i in newUsers){
+                            if (newUsers[i]._id == user._id){
+                                console.log("equal", newUsers[i]);
+                                UserService.setCurrentUser(newUsers[i]);
+                            }
+                        }
+
                     } else {
                         $scope.error = "Unable to update the user";
                     }

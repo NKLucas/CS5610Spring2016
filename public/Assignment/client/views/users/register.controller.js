@@ -32,22 +32,18 @@
             }
 
             UserService
-                .findUserByUsername(user.username)
-                .then(function(foundUser){
-                    if (foundUser != null) {
-                        $scope.message = "User already exists";
+                .register(user)
+                .then(function (newUser) {
+                    console.log("GOT THE USER BACK");
+                    console.log("newuser: ", newUser);
+                    if (newUser.data != null){
+                        UserService.setCurrentUser(newUser.data);
+                        $location.url("/profile");
+                    } else {
+                        $scope.message = "The user has already existed.";
                         return;
                     }
-                    UserService
-                        .createUser(user)
-                        .then(function (newUser) {
-                            console.log("GOT THE USER BACK");
-                            console.log("newuser: ", newUser);
-                            UserService.setCurrentUser(newUser);
-                            $location.url("/profile");
-                        });
-                })
-
+                });
         }
     }
 })();

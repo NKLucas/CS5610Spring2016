@@ -8,13 +8,23 @@
         .controller("HeaderController", HeaderController);
 
 
-    function HeaderController($scope, $location, UserService){
+    function HeaderController($scope, $location, UserService, $rootScope){
         $scope.$location = $location;
         $scope.logout = logout;
 
-        function logout(){
-            UserService.setCurrentUser(null);
-            $location.url("/home");
+        function logout()
+        {
+            UserService
+                .logout()
+                .then(
+                    function(response){
+                        $rootScope.currentUser = null;
+                        $location.url("/login");
+                    },
+                    function(err) {
+                        $scope.error = err;
+                    }
+                );
         }
 
     }

@@ -10,61 +10,41 @@
                     <thead>
                     <tr>
                         <th><i class="glyphicon glyphicon-sort"></i>  Username</th>
-                        <th><i class="glyphicon glyphicon-sort"></i>  Password</th>
-                        <th><i class="glyphicon glyphicon-sort"></i>  Role</th>
-                        <th><i class="glyphicon glyphicon-sort"></i>  Action</th>
+                        <th>  Password</th>
+                        <th><i class="glyphicon glyphicon-sort"></i>  First Name</th>
+                        <th><i class="glyphicon glyphicon-sort"></i>  Last Name</th>
+                        <th>  Role</th>
+                        <th>  Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td><input class="form-control " type="text" placeholder="username"></td>
-                        <td><input class="form-control " type="password" placeholder="password"></td>
-                        <td><input class="form-control " type="text" placeholder="role1, role2"></td>
+                        <td><input ng-model = "newUser.username" class="form-control " type="text" placeholder="username"></td>
+                        <td><input ng-model = "newUser.password" class="form-control " type="password" placeholder="password"></td>
+                        <td><input ng-model = "newUser.firstName" class="form-control " type="text" placeholder="First Name"></td>
+                        <td><input ng-model = "newUser.lastName" class="form-control " type="text" placeholder="Last Name"></td>
+                        <td><input ng-model = "newUser.roles" class="form-control " type="text" placeholder="role1, role2"></td>
                         <td>
-                            <a class="add" href="javascript:void(0)" title="add">
+                            <a class="add btn btn-primary btn-sm" ng-click = "addUser(newUser)" title="add">
                                 <i class="glyphicon glyphicon-plus"></i>
                             </a>
-                            <a class="update" href="javascript:void(0)" title="update">
+                            <a class="update btn btn-success btn-sm" ng-click = "updateUser(newUser)" title="update">
                                 <i class="glyphicon glyphicon-ok"></i>
                             </a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>alice</td>
+                    <tr ng-repeat = "user in users">
+                        <td>{{user.username}}</td>
                         <td></td>
-                        <td>student</td>
+                        <td> {{user.firstName}}</td>
+                        <td> {{user.lastName}}</td>
+                        <td> {{user.roles}}</td>
                         <td>
-                            <a class="remove" href="javascript:void(0)" title="remove">
+                            <a class="remove btn btn-danger btn-sm" ng-click = "deleteUser(user)" title="remove">
                                 <i class="glyphicon glyphicon-remove"></i>
                             </a>
-                            <a class="edit" href="javascript:void(0)" title="edit">
-                                <i class="glyphicon glyphicon-pencil"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>bob</td>
-                        <td></td>
-                        <td>faculty | admin</td>
-                        <td>
-                            <a class="remove" href="javascript:void(0)" title="remove">
-                                <i class="glyphicon glyphicon-remove"></i>
-                            </a>
-                            <a class="edit" href="javascript:void(0)" title="edit">
-                                <i class="glyphicon glyphicon-pencil"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>charlie</td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a class="remove" href="javascript:void(0)" title="remove">
-                                <i class="glyphicon glyphicon-remove"></i>
-                            </a>
-                            <a class="edit" href="javascript:void(0)" title="edit">
-                                <i class="glyphicon glyphicon-pencil"></i>
+                            <a class="edit btn btn-warning btn-sm" ng-click = "selectUser(user)" title="edit">
+                                <i class="glyphicon glyphicon-cog"></i>
                             </a>
                         </td>
                     </tr>

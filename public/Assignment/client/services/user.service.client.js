@@ -10,21 +10,27 @@
     function UserService($http, $q, $rootScope){
         var services = {
             findUserByCredentials: findUserByCredentials,
-            findUserByUsername:findUserByUsername,
+            logout: logout,
             findAllUsers: findAllUsers,
+            register: register,
             createUser: createUser,
             deleteUserById: deleteUserById,
             updateUser: updateUser,
             setCurrentUser: setCurrentUser,
-            getCurrentUser: getCurrentUser
+            getCurrentUser: getCurrentUser,
+            findUserById:findUserById,
         };
         return services;
+
+        function logout() {
+            return $http.post("/api/assignment/logout");
+        }
 
 
         function findUserByCredentials(username, password){
             var deferred = $q.defer();
             $http
-                .get("/api/assignment/user?username=" + username + "&password=" + password)
+                .post("/api/assignment/login?username=" + username + "&password=" + password)
 
                 .success(function(res){
                     deferred.resolve(res);
@@ -32,10 +38,10 @@
                 });
             return deferred.promise;
         }
-        function findUserByUsername(username){
+        function findUserById(id){
             var deferred = $q.defer();
             $http
-                .get("/api/assignment/user?username=" + username)
+                .get("/api/assignment/admin/user/" + id)
                 .success(function(res){
                     deferred.resolve(res);
                 });
@@ -45,23 +51,28 @@
         function findAllUsers() {
             var deferred = $q.defer();
             $http
-                .get("/api/assignment/user")
+                .get("/api/assignment/admin/user")
                 .success(function(res){
                     deferred.resolve(res);
                 });
             return deferred.promise;
         }
 
+        function register(user) {
+            console.log("user.service.client.js", user);
+            return $http.post("/api/assignment/register", user);
+        }
+
+
         function createUser(user){
             var deferred = $q.defer();
             console.log("OK, client service js, createUser");
 
             $http
-                .post("/api/assignment/user", user)
+                .post("/api/assignment/admin/user", user)
                 .success(function(res){
                     deferred.resolve(res);
-                    console.log("GOT THE USER BACK")
-                    console.log(deferred.promise);
+                    console.log("GOT THE USERS BACK")
                 });
             return deferred.promise;
 
@@ -69,9 +80,11 @@
 
         function deleteUserById(userId){
             var deferred = $q.defer();
+            console.log("CLIENT", userId);
             $http
-                .delete("/api/assignment/user/" + userId)
+                .delete("/api/assignment/admin/user/" + userId)
                 .success(function(res){
+                    console.log("CLIENT GOT RETURNED", res);
                     deferred.resolve(res);
                 });
             return deferred.promise;
@@ -80,7 +93,7 @@
         function updateUser(userId, user){
             var deferred = $q.defer();
             $http
-                .put("/api/assignment/user/" + userId, user)
+                .put("/api/assignment/admin/user/" + userId, user)
                 .success(function(res){
                     deferred.resolve(res);
                 });

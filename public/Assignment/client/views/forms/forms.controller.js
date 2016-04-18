@@ -37,6 +37,7 @@
                         .findAllFormsForUser($scope.currentUser._id)
                         .then(function(forms){
                             $scope.forms = forms;
+                            $scope.currentForm.title = "";
 
                         });
                 });
