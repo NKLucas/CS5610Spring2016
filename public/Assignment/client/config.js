@@ -78,6 +78,10 @@
             {
                 $rootScope.currentUser = user;
                 deferred.resolve();
+            } else {
+                $rootScope.errorMessage = 'You need to log in.';
+                deferred.reject();
+                $location.url('/login');
             }
         });
 
