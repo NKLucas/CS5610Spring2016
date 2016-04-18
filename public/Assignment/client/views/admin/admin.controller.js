@@ -57,6 +57,7 @@
                     $scope.newUser.firstName = "";
                     $scope.newUser.lastName = "";
                     $scope.newUser.roles = "";
+                    $scope.newUser._id = null;
                 })
         }
 
