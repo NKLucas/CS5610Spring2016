@@ -13,6 +13,8 @@
         $scope.selectUser = selectUser;
         $scope.deleteUser = deleteUser;
         $scope.updateUser = updateUser;
+        $scope.sortType     = 'username'; // set the default sort type
+        $scope.sortReverse  = false;
 
 
         UserService

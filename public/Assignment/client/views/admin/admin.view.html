@@ -8,11 +8,33 @@
             <div class="table-responsive ">
                 <table class="table table-striped table-bordered">
                     <thead>
+
                     <tr>
-                        <th><i class="glyphicon glyphicon-sort"></i>  Username</th>
+                        <th>
+                            <a ng-click="sortType = 'username'; sortReverse = !sortReverse">
+                                Username
+                                <span ng-show="sortType == 'username' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+                                <span ng-show="sortType == 'username' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                            </a>
+                        </th>
+                        <!--<th><i class="glyphicon glyphicon-sort"></i>  Username</th>-->
                         <th>  Password</th>
-                        <th><i class="glyphicon glyphicon-sort"></i>  First Name</th>
-                        <th><i class="glyphicon glyphicon-sort"></i>  Last Name</th>
+                        <th>
+                            <a ng-click="sortType = 'firstName'; sortReverse = !sortReverse">
+                                Frist Name
+                                <span ng-show="sortType == 'firstName' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+                                <span ng-show="sortType == 'firstName' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                            </a>
+                        </th>
+                        <th>
+                            <a ng-click="sortType = 'lastName'; sortReverse = !sortReverse">
+                                Last Name
+                                <span ng-show="sortType == 'lastName' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+                                <span ng-show="sortType == 'lastName' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                            </a>
+                        </th>
+                        <!--<th><i class="glyphicon glyphicon-sort"></i>  First Name</th>-->
+                        <!--<th><i class="glyphicon glyphicon-sort"></i>  Last Name</th>-->
                         <th>  Role</th>
                         <th>  Action</th>
                     </tr>
@@ -33,7 +55,7 @@
                             </a>
                         </td>
                     </tr>
-                    <tr ng-repeat = "user in users">
+                    <tr ng-repeat = "user in users | orderBy:sortType:sortReverse ">
                         <td>{{user.username}}</td>
                         <td></td>
                         <td> {{user.firstName}}</td>
