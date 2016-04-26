@@ -12,6 +12,10 @@ var upload = multer(); // for parsing multipart/form-data
 
 var app = express();
 
+//var topSecret = process.env.SESSION_SECRET;
+//console.log("secret", process.env);
+
+
 app.use(session({
     secret: 'this is the secret',
     resave: true,
@@ -49,4 +53,5 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
 var db = mongoose.connect(connection_string);
 app.listen(port, ipaddress);
 
-require("./public/Assignment/server/app.js")(app, mongoose, db);
+//require("./public/Assignment/server/app.js")(app, mongoose, db);
+require("./public/Project/server/app.js")(app, mongoose, db);
