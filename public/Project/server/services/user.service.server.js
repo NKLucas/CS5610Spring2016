@@ -7,21 +7,22 @@ var passport         = require('passport');
 var LocalStrategy    = require('passport-local').Strategy;
 var bcrypt           = require("bcrypt-nodejs");
 
-module.exports = function(app, userModel){
+module.exports = function(app, userModel, tripModel){
 
     var auth = authorized;
 
-    app.post  ("/api/assignment/login",  passport.authenticate('local'), login);
-    app.get   ('/api/assignment/loggedin',          loggedin);
-    app.post  ("/api/assignment/logout",            logout);
-    app.post  ("/api/assignment/register",          register);
+    app.post  ("/api/project/login",  passport.authenticate('local'), login);
+    app.get   ('/api/project/loggedin',          loggedin);
+    app.post  ("/api/project/logout",            logout);
+    app.post  ("/api/project/register",          register);
 
-    app.post  ("/api/assignment/admin/user", auth,  createUser);
-    app.get   ("/api/assignment/admin/user/:id", auth, findUserById);
-    app.get   ("/api/assignment/admin/user", auth,  findAllUsers);
+    app.post  ("/api/project/admin/user", auth,  createUser);
+    app.get   ("/api/project/admin/user/:id", auth, findUserById);
+    app.get   ("/api/project/admin/user", auth,  findAllUsers);
+    app.get   ("/api/project/admin/trips", auth,  findAllTrips);
 
-    app.put   ("/api/assignment/admin/user/:id",  auth,    updateUser);
-    app.delete("/api/assignment/admin/user/:id", auth,  deleteUser);
+    app.put   ("/api/project/admin/user/:id",  auth,    updateUser);
+    app.delete("/api/project/admin/user/:id", auth,  deleteUser);
 
     passport.use(new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
@@ -114,6 +115,14 @@ module.exports = function(app, userModel){
             .findAllUsers()
             .then(function(users){
                 res.json(users);
+            });
+    }
+
+    function findAllTrips(req, res){
+        tripModel
+            .findAllTrips()
+            .then(function(trips){
+                res.json(trips);
             });
     }
 

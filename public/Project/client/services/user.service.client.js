@@ -19,18 +19,19 @@
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
             findUserById:findUserById,
+            findAllTrips:findAllTrips
         };
         return services;
 
         function logout() {
-            return $http.post("/api/assignment/logout");
+            return $http.post("/api/project/logout");
         }
 
 
         function findUserByCredentials(username, password){
             var deferred = $q.defer();
             $http
-                .post("/api/assignment/login?username=" + username + "&password=" + password)
+                .post("/api/project/login?username=" + username + "&password=" + password)
 
                 .success(function(res){
                     deferred.resolve(res);
@@ -41,17 +42,30 @@
         function findUserById(id){
             var deferred = $q.defer();
             $http
-                .get("/api/assignment/admin/user/" + id)
+                .get("/api/project/admin/user/" + id)
                 .success(function(res){
                     deferred.resolve(res);
                 });
             return deferred.promise;
         }
 
+
+        function findAllTrips() {
+            var deferred = $q.defer();
+            $http
+                .get("/api/project/admin/trips")
+                .success(function(res){
+                    deferred.resolve(res);
+                });
+            return deferred.promise;
+        }
+
+
+
         function findAllUsers() {
             var deferred = $q.defer();
             $http
-                .get("/api/assignment/admin/user")
+                .get("/api/project/admin/user")
                 .success(function(res){
                     deferred.resolve(res);
                 });
@@ -60,7 +74,7 @@
 
         function register(user) {
             console.log("user.service.client.js", user);
-            return $http.post("/api/assignment/register", user);
+            return $http.post("/api/project/register", user);
         }
 
 
@@ -69,7 +83,7 @@
             console.log("OK, client service js, createUser");
 
             $http
-                .post("/api/assignment/admin/user", user)
+                .post("/api/project/admin/user", user)
                 .success(function(res){
                     deferred.resolve(res);
                     console.log("GOT THE USERS BACK")
@@ -82,7 +96,7 @@
             var deferred = $q.defer();
             console.log("CLIENT", userId);
             $http
-                .delete("/api/assignment/admin/user/" + userId)
+                .delete("/api/project/admin/user/" + userId)
                 .success(function(res){
                     console.log("CLIENT GOT RETURNED", res);
                     deferred.resolve(res);
@@ -93,7 +107,7 @@
         function updateUser(userId, user){
             var deferred = $q.defer();
             $http
-                .put("/api/assignment/admin/user/" + userId, user)
+                .put("/api/project/admin/user/" + userId, user)
                 .success(function(res){
                     deferred.resolve(res);
                 });

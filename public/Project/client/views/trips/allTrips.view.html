@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-sm-9 col-sm-offset-1 col-md-10 col-md-offset-1 main">
             <h1 class="page-header">Admin!</h1>
-            <h2 class="sub-header">Users</h2>
+            <h2 class="sub-header">All Trips</h2>
 
             <div class="table-responsive ">
                 <table class="table table-striped table-bordered">
@@ -11,34 +11,40 @@
 
                     <tr>
                         <th>
-                            <a ng-click="sortType = 'username'; sortReverse = !sortReverse">
-                                Username
-                                <span ng-show="sortType == 'username' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
-                                <span ng-show="sortType == 'username' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                            <a ng-click="sortType = 'traveller'; sortReverse = !sortReverse">
+                                Traveller
+                                <span ng-show="sortType == 'traveller' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+                                <span ng-show="sortType == 'traveller' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
                             </a>
                         </th>
                         <!--<th><i class="glyphicon glyphicon-sort"></i>  Username</th>-->
                         <th>  Password</th>
                         <th>
-                            <a ng-click="sortType = 'firstName'; sortReverse = !sortReverse">
-                                Frist Name
-                                <span ng-show="sortType == 'firstName' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
-                                <span ng-show="sortType == 'firstName' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                            <a ng-click="sortType = 'guide'; sortReverse = !sortReverse">
+                                Guide
+                                <span ng-show="sortType == 'guide' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+                                <span ng-show="sortType == 'guide' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
                             </a>
                         </th>
                         <th>
-                            <a ng-click="sortType = 'lastName'; sortReverse = !sortReverse">
-                                Last Name
-                                <span ng-show="sortType == 'lastName' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
-                                <span ng-show="sortType == 'lastName' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                            <a ng-click="sortType = 'startDate'; sortReverse = !sortReverse">
+                                Start Date
+                                <span ng-show="sortType == 'startDate' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+                                <span ng-show="sortType == 'startDate' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
                             </a>
                         </th>
-                        <!--<th><i class="glyphicon glyphicon-sort"></i>  First Name</th>-->
-                        <!--<th><i class="glyphicon glyphicon-sort"></i>  Last Name</th>-->
-                        <th>  University</th>
+
+                        <th>
+                            <a ng-click="sortType = 'endDate'; sortReverse = !sortReverse">
+                                End Date
+                                <span ng-show="sortType == 'endDate' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+                                <span ng-show="sortType == 'endDate' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                            </a>
+                        </th>
+
                         <th>  City</th>
                         <th>  State</th>
-                        <th>  Role</th>
+                        <th>  Total Visitors</th>
                         <th>  Action</th>
 
                     </tr>

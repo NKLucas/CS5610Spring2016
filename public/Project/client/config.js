@@ -37,6 +37,16 @@
                     }
 
                 })
+
+            .when("/alltrips",
+                {
+                    templateUrl: "views/trips/allTrips.view.html",
+                    controller: "AllTripsController",
+                    resolve: {
+                        loggedin: checkAdmin
+                    }
+
+                })
             .when("/home",
                 {
                     templateUrl: "views/carousel/carousel.view.html",
@@ -60,10 +70,10 @@
                 resolve:{
                     loggedin: checkCurrentUser
                 }
+            })
+            .otherwise({
+                redirectTo:"/home"
             });
-            //.otherwise({
-            //    redirectTo:"/home"
-            //});
 
     }
 
@@ -71,7 +81,7 @@
     {
         var deferred = $q.defer();
 
-        $http.get('/api/assignment/loggedin').success(function(user)
+        $http.get('/api/project/loggedin').success(function(user)
         {
             $rootScope.errorMessage = null;
             // User is Authenticated
@@ -93,7 +103,7 @@
     {
         var deferred = $q.defer();
 
-        $http.get('/api/assignment/loggedin').success(function(user)
+        $http.get('/api/project/loggedin').success(function(user)
         {
             $rootScope.errorMessage = null;
             // User is Authenticated
@@ -118,7 +128,7 @@
     {
         var deferred = $q.defer();
 
-        $http.get('/api/assignment/loggedin').success(function(user)
+        $http.get('/api/project/loggedin').success(function(user)
         {
             $rootScope.errorMessage = null;
             // User is Authenticated

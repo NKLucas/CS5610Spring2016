@@ -6,9 +6,9 @@
     "use strict";
     angular
         .module("TravelWithMe")
-        .controller("AdminController", AdminController);
+        .controller("AllTripsController", AllTripsController);
 
-    function AdminController($rootScope, $scope, UserService, $location){
+    function AllTripsController($rootScope, $scope, UserService, $location){
         $scope.addUser = addUser;
         $scope.selectUser = selectUser;
         $scope.deleteUser = deleteUser;

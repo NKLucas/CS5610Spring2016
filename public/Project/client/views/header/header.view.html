@@ -23,10 +23,10 @@
                         <li class="dropdown" ng-show="currentUser">
                             <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{currentUser.username}} <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#/profile">Profile</a></li>
+                                <li><a href="#/profile">My Profile</a></li>
                                 <li ng-show="currentUser.roles.indexOf('traveller') >= 0"><a href="#">My Trips</a></li>
                                 <li ng-show="currentUser.roles.indexOf('guide') >= 0"><a href="#">My Guides</a></li>
-                                <li ng-show="currentUser.roles.indexOf('admin') >= 0"><a href="#">All Trips</a></li>
+                                <li ng-show="currentUser.roles.indexOf('admin') >= 0"><a href="#/alltrips">All Trips</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header"></li>
                                 <li><a href = "mailto:lizhiyu1991@gmail.com">Report Problem</a></li>
