@@ -5,11 +5,21 @@ module.exports = function(app, tripModel){
     app.get("/api/project/traveller/:username/trip", getTripForTraveller);
     app.get("/api/project/guide/:username/trip", getTripForGuide);
     app.get("/api/project/trip/:tripId", getTripById);
+    app.get("/api/project/trips",  findAllTrips);
+
 
     app.post("/api/project/trip/", createTrip);
     app.put("/api/project/trip/:tripId", updateTrip);
     app.delete("/api/project/trip/:tripId", deleteTrip);
 
+
+    function findAllTrips(req, res){
+        tripModel
+            .findAllTrips()
+            .then(function(trips){
+                res.json(trips);
+            });
+    }
 
 
     function getTripForTraveller(req, res){
@@ -40,11 +50,16 @@ module.exports = function(app, tripModel){
     }
 
     function createTrip(req, res){
+        console.log("create Trip from server service.")
         var trip = req.body;
         tripModel
             .createTrip(trip)
             .then(function(trip){
-                res.json(trip);
+                tripModel
+                    .findAllTrips()
+                    .then(function(trips){
+                        res.json(trips);
+                    })
             });
     }
 
@@ -53,17 +68,42 @@ module.exports = function(app, tripModel){
         var trip = req.body;
         tripModel
             .updateTrip(tripId, trip)
-            .then(function(new_trip){
-                res.json(new_trip);
+            .then(
+                function(new_trip) {
+                    return tripModel.findAllTrips();
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(trips){
+                    res.json(trips);
+                },
+            function(err){
+                res.status(400).send(err);
             });
     }
 
-    function deleteTrip(req, res){
-        var tripId = req.params.tripId;
+    function deleteTrip(req, res) {
         tripModel
-            .removeTrip(tripId)
-            .then(function(trips){
-                res.json(trips);
-            });
+            .removeTrip(req.params.tripId)
+            .then(
+                function(trip){
+                    return tripModel.findAllTrips();
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(trips){
+                    res.json(trips);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
     }
+
 };

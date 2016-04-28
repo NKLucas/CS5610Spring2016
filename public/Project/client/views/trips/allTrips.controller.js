@@ -8,59 +8,69 @@
         .module("TravelWithMe")
         .controller("AllTripsController", AllTripsController);
 
-    function AllTripsController($rootScope, $scope, UserService, $location){
-        $scope.addUser = addUser;
-        $scope.selectUser = selectUser;
-        $scope.deleteUser = deleteUser;
-        $scope.updateUser = updateUser;
-        $scope.sortType     = 'username'; // set the default sort type
+    function AllTripsController($rootScope, $scope, TripService, UserService, $location){
+        $scope.addTrip = addTrip;
+        $scope.selectTrip = selectTrip;
+        $scope.deleteTrip = deleteTrip;
+        $scope.updateTrip = updateTrip;
+        $scope.sortType     = 'traveller'; // set the default sort type
         $scope.sortReverse  = false;
 
 
-        UserService
-            .findAllUsers()
-            .then(function(users){
-                $scope.users = users;
+        TripService
+            .findAllTrips()
+            .then(function(trips){
+                $scope.trips = trips;
             });
 
-        function addUser(newUser){
-            UserService
-                .createUser(newUser)
-                .then(function(users){
-                    $scope.users = users;
+        function addTrip(newTrip){
+            TripService
+                .createTrip(newTrip)
+                .then(function(trips){
+                    $scope.trips = trips;
+                    $scope.newTrip.traveller = "";
+                    $scope.newTrip.guide = "";
+                    $scope.newTrip.startDate = "";
+                    $scope.newTrip.endDate = "";
+                    $scope.newTrip.city = "";
+                    $scope.newTrip.state = "";
+                    $scope.newTrip.totalPeople = "";
+                    $scope.newTrip._id = null;
                 })
         }
 
-        function selectUser(user){
-            UserService
-                .findUserById(user._id)
-                .then(function(returnUser){
-                    $scope.newUser = returnUser;
+        function selectTrip(trip){
+            TripService
+                .findTripById(trip._id)
+                .then(function(returnTrip){
+                    delete returnTrip.startDate;
+                    delete returnTrip.endDate;
+                    console.log("returned Trip", returnTrip);
+                    $scope.newTrip = returnTrip;
                 })
         }
 
-        function deleteUser(user){
-            UserService
-                .deleteUserById(user._id)
-                .then(function(users){
-                    $scope.users = users;
+        function deleteTrip(trip){
+            TripService
+                .deleteTripById(trip._id)
+                .then(function(trips){
+                    $scope.trips = trips;
                 })
         }
 
-        function updateUser(user){
-            UserService
-                .updateUser(user._id, user)
-                .then(function(users){
-                    $scope.users = users;
-                    $scope.newUser.username = "";
-                    $scope.newUser.password = "";
-                    $scope.newUser.firstName = "";
-                    $scope.newUser.lastName = "";
-                    $scope.newUser.university = "";
-                    $scope.newUser.city = "";
-                    $scope.newUser.state = "";
-                    $scope.newUser.roles = "";
-                    $scope.newUser._id = null;
+        function updateTrip(trip){
+            TripService
+                .updateTripById(trip._id, trip)
+                .then(function(trips){
+                    $scope.trips = trips;
+                    $scope.newTrip.traveller = "";
+                    $scope.newTrip.guide = "";
+                    $scope.newTrip.startDate = "";
+                    $scope.newTrip.endDate = "";
+                    $scope.newTrip.city = "";
+                    $scope.newTrip.state = "";
+                    $scope.newTrip.totalPeople = "";
+                    $scope.newTrip._id = null;
                 })
         }
 

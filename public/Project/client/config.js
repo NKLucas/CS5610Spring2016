@@ -55,10 +55,10 @@
                     }
 
                 })
-            .when("/forms",
+            .when("/newtrip",
                 {
-                    templateUrl: "views/forms/forms.view.html",
-                    controller: "FormController",
+                    templateUrl: "views/trips/newTrip.view.html",
+                    controller: "NewTripController",
                     resolve: {
                         loggedin: checkCurrentUser
                     }

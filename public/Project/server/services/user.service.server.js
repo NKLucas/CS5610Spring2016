@@ -19,10 +19,11 @@ module.exports = function(app, userModel, tripModel){
     app.post  ("/api/project/admin/user", auth,  createUser);
     app.get   ("/api/project/admin/user/:id", auth, findUserById);
     app.get   ("/api/project/admin/user", auth,  findAllUsers);
-    app.get   ("/api/project/admin/trips", auth,  findAllTrips);
+
 
     app.put   ("/api/project/admin/user/:id",  auth,    updateUser);
     app.delete("/api/project/admin/user/:id", auth,  deleteUser);
+
 
     passport.use(new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
@@ -118,13 +119,7 @@ module.exports = function(app, userModel, tripModel){
             });
     }
 
-    function findAllTrips(req, res){
-        tripModel
-            .findAllTrips()
-            .then(function(trips){
-                res.json(trips);
-            });
-    }
+
 
     function findUserById(req, res){
         var id = req.params.id;
@@ -190,6 +185,8 @@ module.exports = function(app, userModel, tripModel){
             res.status(403).send("NOT ADMIN");
         }
     }
+
+
 
     function login(req, res) {
         var user = req.user;

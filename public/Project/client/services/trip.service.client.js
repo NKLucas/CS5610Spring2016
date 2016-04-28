@@ -16,13 +16,35 @@
             findAllTripsForGuide: findAllTripsForGuide,
             deleteTripById: deleteTripById,
             updateTripById: updateTripById,
+            findTripById:findTripById,
+            findAllTrips:findAllTrips
         }
         return services;
+
+        function findAllTrips() {
+            var deferred = $q.defer();
+            $http
+                .get("/api/project/trips")
+                .success(function(res){
+                    deferred.resolve(res);
+                });
+            return deferred.promise;
+        }
+
+        function findTripById(trip_Id){
+            var deferred = $q.defer();
+            $http
+                .get("/api/project/trip/" + trip_Id)
+                .success(function(res){
+                    deferred.resolve(res);
+                })
+            return deferred.promise;
+        }
 
         function createTrip(trip){
             var deferred = $q.defer();
             $http
-                .post("/api/project/trip", trip)
+                .post("/api/project/trip/", trip)
                 .success(function(res){
 
                     deferred.resolve(res);
@@ -56,7 +78,6 @@
 
         function findTripById(tripId){
             var deferred = $q.defer();
-            console.log(tripId, "FROM CLient Service");
             $http
                 .get("/api/project/trip/" + tripId)
                 .success(function(res){
@@ -69,7 +90,6 @@
 
         function deleteTripById(tripId){
             var deferred = $q.defer();
-            console.log(tripId, "FROM CLient Service");
             $http
                 .delete("/api/project/trip/" + tripId)
                 .success(function(res){

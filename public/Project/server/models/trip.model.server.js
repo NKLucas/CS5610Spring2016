@@ -84,6 +84,7 @@ module.exports = function(mongoose, db){
         return deferred.promise;
     }
 
+
     function remove(id){
         var deferred = q.defer();
         tripModel

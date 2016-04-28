@@ -2,7 +2,8 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-9 col-sm-offset-1 col-md-10 col-md-offset-1 main">
-            <h1 class="page-header">Admin!</h1>
+            <h1 class="page-header"></h1>
+            <br>
             <h2 class="sub-header">All Trips</h2>
 
             <div class="table-responsive ">
@@ -17,8 +18,7 @@
                                 <span ng-show="sortType == 'traveller' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
                             </a>
                         </th>
-                        <!--<th><i class="glyphicon glyphicon-sort"></i>  Username</th>-->
-                        <th>  Password</th>
+                        <!--<th><i class="glyphicon glyphicon-sort"></i>  Tripname</th>-->
                         <th>
                             <a ng-click="sortType = 'guide'; sortReverse = !sortReverse">
                                 Guide
@@ -51,37 +51,35 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td><input ng-model = "newUser.username" class="form-control " type="text" placeholder="username"></td>
-                        <td><input ng-model = "newUser.password" class="form-control " type="password" placeholder="password"></td>
-                        <td><input ng-model = "newUser.firstName" class="form-control " type="text" placeholder="First Name"></td>
-                        <td><input ng-model = "newUser.lastName" class="form-control " type="text" placeholder="Last Name"></td>
-                        <td><input ng-model = "newUser.university" class="form-control " type="text" placeholder="University"></td>
-                        <td><input ng-model = "newUser.city" class="form-control " type="text" placeholder="City"></td>
-                        <td><input ng-model = "newUser.state" class="form-control " type="text" placeholder="State"></td>
-                        <td><input ng-model = "newUser.roles" class="form-control " type="text" placeholder="role1, role2"></td>
+                        <td><input ng-model = "newTrip.traveller" class="form-control " type="text" placeholder="Traveller"></td>
+                        <td><input ng-model = "newTrip.guide" class="form-control " type="text" placeholder="Guide"></td>
+                        <td><input ng-model = "newTrip.startDate" class="form-control " type="date"></td>
+                        <td><input ng-model = "newTrip.endDate" class="form-control " type="date"></td>
+                        <td><input ng-model = "newTrip.city" class="form-control " type="text" placeholder="City"></td>
+                        <td><input ng-model = "newTrip.state" class="form-control " type="text" placeholder="State"></td>
+                        <td><input ng-model = "newTrip.totalPeople" class="form-control " type="text" placeholder="1"></td>
                         <td>
-                            <a class="add btn btn-primary btn-sm" ng-click = "addUser(newUser)" title="add">
+                            <a class="add btn btn-primary btn-sm" ng-click = "addTrip(newTrip)" title="add">
                                 <i class="glyphicon glyphicon-plus"></i>
                             </a>
-                            <a class="update btn btn-success btn-sm" ng-click = "updateUser(newUser)" title="update">
+                            <a class="update btn btn-success btn-sm" ng-click = "updateTrip(newTrip)" title="update">
                                 <i class="glyphicon glyphicon-ok"></i>
                             </a>
                         </td>
                     </tr>
-                    <tr ng-repeat = "user in users | orderBy:sortType:sortReverse ">
-                        <td>{{user.username}}</td>
-                        <td></td>
-                        <td> {{user.firstName}}</td>
-                        <td> {{user.lastName}}</td>
-                        <td> {{user.university}}</td>
-                        <td> {{user.city}}</td>
-                        <td> {{user.state}}</td>
-                        <td> {{user.roles}}</td>
+                    <tr ng-repeat = "trip in trips | orderBy:sortType:sortReverse ">
+                        <td>{{trip.traveller}}</td>
+                        <td> {{trip.guide}}</td>
+                        <td> {{trip.startDate}}</td>
+                        <td> {{trip.endDate}}</td>
+                        <td> {{trip.city}}</td>
+                        <td> {{trip.state}}</td>
+                        <td> {{trip.totalPeople}}</td>
                         <td>
-                            <a class="remove btn btn-danger btn-sm" ng-click = "deleteUser(user)" title="remove">
+                            <a class="remove btn btn-danger btn-sm" ng-click = "deleteTrip(trip)" title="remove">
                                 <i class="glyphicon glyphicon-remove"></i>
                             </a>
-                            <a class="edit btn btn-warning btn-sm" ng-click = "selectUser(user)" title="edit">
+                            <a class="edit btn btn-warning btn-sm" ng-click = "selectTrip(trip)" title="edit">
                                 <i class="glyphicon glyphicon-cog"></i>
                             </a>
                         </td>

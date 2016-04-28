@@ -4,7 +4,7 @@
 
 module.exports = function(mongoose){
     var tripSchema = mongoose.Schema({
-        "travller" : String,
+        "traveller" : String,
         "guide" : String,
         "city": String,
         "state": String,

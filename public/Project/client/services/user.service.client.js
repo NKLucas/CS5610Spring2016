@@ -19,7 +19,7 @@
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
             findUserById:findUserById,
-            findAllTrips:findAllTrips
+
         };
         return services;
 
@@ -50,15 +50,7 @@
         }
 
 
-        function findAllTrips() {
-            var deferred = $q.defer();
-            $http
-                .get("/api/project/admin/trips")
-                .success(function(res){
-                    deferred.resolve(res);
-                });
-            return deferred.promise;
-        }
+
 
 
 
