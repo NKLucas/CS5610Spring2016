@@ -50,7 +50,6 @@ module.exports = function(app, tripModel){
     }
 
     function createTrip(req, res){
-        console.log("create Trip from server service.")
         var trip = req.body;
         tripModel
             .createTrip(trip)

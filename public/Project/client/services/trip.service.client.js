@@ -56,7 +56,7 @@
         function findAllTripsForTraveller(username){
             var deferred = $q.defer();
             $http
-                .get("/api/project/traveller/" + userId + "/trip")
+                .get("/api/project/traveller/" + username + "/trip")
                 .success(function(res){
                     deferred.resolve(res);
                 });
@@ -67,7 +67,7 @@
         function findAllTripsForGuide(username){
             var deferred = $q.defer();
             $http
-                .get("/api/project/guide/" + userId + "/trip")
+                .get("/api/project/guide/" + username + "/trip")
                 .success(function(res){
                     deferred.resolve(res);
                 });

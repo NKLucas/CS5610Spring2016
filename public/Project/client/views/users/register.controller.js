@@ -11,6 +11,11 @@
     function RegisterController($location, $scope, UserService, $rootScope) {
         $scope.message = null;
         $scope.register = register;
+        console.log($rootScope.registerUser);
+        $scope.user = $rootScope.registerUser;
+        //$scope.user.university = $rootScope.university;
+        //$scope.user.city = $rootScope.city;
+        //$scope.user.state = $rootScope.state;
 
         function register(user){
             $scope.message = null;

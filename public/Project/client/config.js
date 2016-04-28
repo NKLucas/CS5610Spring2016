@@ -10,6 +10,11 @@
 
     function config($routeProvider){
         $routeProvider
+            .when("/preregister",
+                {
+                    templateUrl: "views/users/preRegister.view.html",
+                    controller: "PreRegisterController"
+                })
             .when("/register",
                 {
                     templateUrl: "views/users/register.view.html",
@@ -47,12 +52,27 @@
                     }
 
                 })
+            .when("/guidetrips",
+                {
+                    templateUrl: "views/trips/guideTrips.view.html",
+                    controller: "GuideTripsController",
+                    resolve: {
+                        loggedin: checkLoggedin
+                    }
+
+                })
+            .when("/mytrips",
+                {
+                    templateUrl: "views/trips/myTrips.view.html",
+                    controller: "MyTripsController",
+                    resolve: {
+                        loggedin: checkLoggedin
+                    }
+
+                })
             .when("/home",
                 {
                     templateUrl: "views/carousel/carousel.view.html",
-                    resolve: {
-                        loggedin: checkCurrentUser
-                    }
 
                 })
             .when("/newtrip",
@@ -60,7 +80,7 @@
                     templateUrl: "views/trips/newTrip.view.html",
                     controller: "NewTripController",
                     resolve: {
-                        loggedin: checkCurrentUser
+                        loggedin: checkLoggedin
                     }
                 })
             .when("/form/:formId/:title/fields",{
@@ -83,14 +103,12 @@
 
         $http.get('/api/project/loggedin').success(function(user)
         {
-            $rootScope.errorMessage = null;
             // User is Authenticated
             if (user !== '0' && user.roles.indexOf('admin') != -1)
             {
                 $rootScope.currentUser = user;
                 deferred.resolve();
             } else {
-                $rootScope.errorMessage = 'You need to log in.';
                 deferred.reject();
                 $location.url('/login');
             }
@@ -105,7 +123,6 @@
 
         $http.get('/api/project/loggedin').success(function(user)
         {
-            $rootScope.errorMessage = null;
             // User is Authenticated
             if (user !== '0')
             {
@@ -115,7 +132,6 @@
             // User is Not Authenticated
             else
             {
-                $rootScope.errorMessage = 'You need to log in.';
                 deferred.reject();
                 $location.url('/login');
             }
@@ -130,7 +146,7 @@
 
         $http.get('/api/project/loggedin').success(function(user)
         {
-            $rootScope.errorMessage = null;
+            console.log("check CurrentUser", user);
             // User is Authenticated
             if (user !== '0')
             {

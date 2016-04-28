@@ -1,0 +1,48 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-1 col-md-10 col-md-offset-1 main">
+            <h1 class="page-header"></h1>
+            <br><br>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="university" class="col-sm-2 control-label">University:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="university" placeholder="Northeastern University"  ng-model="user.university">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="city" class="col-sm-2 control-label">City:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="city" placeholder="Boston"  ng-model="user.city">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="state" class="col-sm-2 control-label">State:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="state" placeholder="MA"  ng-model="user.state">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <a ng-click = "locate(user)" class="btn btn-primary form-control active" role="button">Locate My University</a>
+                    </div>
+                </div>
+            </form>
+            <br>
+            <iframe id="map"
+                    frameborder="0" style="border:0"
+                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyChm5QMhdgTwJON3gI-v6OvhlbOUFkDFPw&q=Northeastern+University&zoom=12" allowfullscreen>
+            </iframe>
+
+            <br><br>
+
+            <div class="form-group" ng-show="show">
+                <div class="col-sm-offset-10 col-sm-2">
+                    <a href="#/register" class="btn btn-success form-control active" role="button">Next</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

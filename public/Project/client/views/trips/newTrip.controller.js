@@ -52,6 +52,7 @@
                 .then(function (newTrip) {
                     console.log("GOT THE Trip BACK");
                     console.log("newtrip: ", newTrip);
+                    $location.url("/mytrips");
                 });
         }
     }
