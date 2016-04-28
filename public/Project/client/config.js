@@ -33,6 +33,14 @@
                         loggedin: checkLoggedin
                     }
                 })
+            .when("/prebook",
+                {
+                    templateUrl: "views/trips/preBook.view.html",
+                    controller: "PreBookController",
+                    resolve: {
+                        loggedin: checkLoggedin
+                    }
+                })
             .when("/admin",
                 {
                     templateUrl: "views/admin/admin.view.html",

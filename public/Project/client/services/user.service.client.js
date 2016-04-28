@@ -49,11 +49,6 @@
             return deferred.promise;
         }
 
-
-
-
-
-
         function findAllUsers() {
             var deferred = $q.defer();
             $http

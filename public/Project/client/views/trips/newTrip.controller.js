@@ -8,6 +8,12 @@
     function NewTripController($location, $scope, TripService, $rootScope) {
         $scope.message = null;
         $scope.createTrip = createTrip;
+        $scope.trip = {
+            guide:$rootScope.guide,
+            traveller:$rootScope.currentUser.username,
+            city:$rootScope.tripCity,
+            state:$rootScope.tripState
+        }
 
         function createTrip(trip){
             console.log(trip);
