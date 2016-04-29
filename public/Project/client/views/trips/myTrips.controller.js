@@ -60,16 +60,20 @@
         function updateTrip(trip){
             TripService
                 .updateTripById(trip._id, trip)
-                .then(function(trips){
-                    $scope.trips = trips;
-                    $scope.newTrip.traveller = "";
-                    $scope.newTrip.guide = "";
-                    $scope.newTrip.startDate = "";
-                    $scope.newTrip.endDate = "";
-                    $scope.newTrip.city = "";
-                    $scope.newTrip.state = "";
-                    $scope.newTrip.totalPeople = "";
-                    $scope.newTrip._id = null;
+                .then(function(results){
+                    TripService
+                        .findAllTripsForTraveller($rootScope.currentUser.username)
+                        .then(function(trips){
+                            $scope.trips = trips;
+                            $scope.newTrip.traveller = "";
+                            $scope.newTrip.guide = "";
+                            $scope.newTrip.startDate = "";
+                            $scope.newTrip.endDate = "";
+                            $scope.newTrip.city = "";
+                            $scope.newTrip.state = "";
+                            $scope.newTrip.totalPeople = "";
+                            $scope.newTrip._id = null;
+                        })
                 })
         }
 
