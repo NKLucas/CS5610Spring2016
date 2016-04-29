@@ -11,11 +11,8 @@
     function RegisterController($location, $scope, UserService, $rootScope) {
         $scope.message = null;
         $scope.register = register;
-        console.log($rootScope.registerUser);
         $scope.user = $rootScope.registerUser;
-        //$scope.user.university = $rootScope.university;
-        //$scope.user.city = $rootScope.city;
-        //$scope.user.state = $rootScope.state;
+        $rootScope.registerUser = null;
 
         function register(user){
             $scope.message = null;
@@ -35,6 +32,22 @@
                 $scope.message = "Passwords must match";
                 return;
             }
+            if($scope.role1 == null && $scope.role2 == null){
+                $scope.message = "Please select a role";
+                return
+            }
+            var roles = [];
+            if ($scope.role1 == true){
+                roles.push("traveller");
+            }
+            if ($scope.role2 == true){
+                roles.push("guide");
+            }
+            console.log("role1", $scope.role1);
+            console.log("role2", $scope.role2);
+            user.roles = roles;
+            console.log(user);
+
 
             UserService
                 .register(user)

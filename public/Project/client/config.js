@@ -25,6 +25,11 @@
                     templateUrl: "views/users/login.view.html",
                     controller: "LoginController"
                 })
+            .when("/userdistribute",
+                {
+                    templateUrl: "views/map/userDistribution.view.html",
+                    controller: "UserDistributeController"
+                })
             .when("/profile",
                 {
                     templateUrl: "views/users/profile.view.html",
@@ -91,14 +96,6 @@
                         loggedin: checkLoggedin
                     }
                 })
-            .when("/form/:formId/:title/fields",{
-                templateUrl: "views/forms/field.view.html",
-                controller: "FieldController",
-                controllerAs: "model",
-                resolve:{
-                    loggedin: checkCurrentUser
-                }
-            })
             .otherwise({
                 redirectTo:"/home"
             });

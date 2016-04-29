@@ -18,7 +18,7 @@ module.exports = function(app, userModel, tripModel){
 
     app.post  ("/api/project/admin/user", auth,  createUser);
     app.get   ("/api/project/admin/user/:id", auth, findUserById);
-    app.get   ("/api/project/admin/user", auth,  findAllUsers);
+    app.get   ("/api/project/admin/user",  findAllUsers);
 
 
     app.put   ("/api/project/admin/user/:id",  auth,    updateUser);
@@ -32,7 +32,7 @@ module.exports = function(app, userModel, tripModel){
 
     function register(req, res) {
         var newUser = req.body;
-        newUser.roles = ['admin'];
+        //newUser.roles = ['admin'];
         userModel
             .findUserByUsername(newUser.username)
             .then(
